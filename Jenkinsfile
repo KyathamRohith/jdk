@@ -50,7 +50,7 @@ pipeline {
             steps {
                 script {
                     for (service in SERVICES) {
-                        sh "kubectl apply -f kubernetes/${service}-deployment.yaml"
+                     /*   sh "kubectl apply -f kubernetes/${service}-deployment.yaml" */
                         sh "kubectl apply -f kubernetes/${service}-service.yaml"
                     }
                 }

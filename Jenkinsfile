@@ -61,19 +61,20 @@ pipeline {
         }
 
         stage('Deploy to Kubernetes') {
-            steps {
-                script {
-                    def services = ["shopfront", "productcatalogue", "stockmanager"]
-                    for (service in services) {
-                        sh """
-                        set -e
-                        echo "📦 Deploying ${service} to Kubernetes..."
-                        kubectl -n $KUBE_NAMESPACE apply -f kubernetes/${service}-deployment.yaml
-                        kubectl -n $KUBE_NAMESPACE apply -f kubernetes/${service}-service.yaml
-                        """
-                    }
-                }
+    steps {
+        script {
+            def services = ["shopfront", "productcatalogue", "stockmanager"]
+            for (service in services) {
+                sh """
+                export KUBECONFIG=/home/master/.kube/config
+               
+                kubectl -n $KUBE_NAMESPACE apply -f kubernetes/${service}-service.yaml
+                """
             }
+        }
+    }
+}
+
         }
     }
 

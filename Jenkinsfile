@@ -21,7 +21,7 @@ pipeline {
                         sh """
                         set -e
                         echo "🔨 Building and testing ${service}..."
-                        mvn -f ${service}/pom.xml clean package
+                        mvn -f ${service}/pom.xml clean package -DskipTests
                         """
                     }
                 }

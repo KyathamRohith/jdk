@@ -1,0 +1,7 @@
+/home/master/projects/docker-Java-kubernetes-project/stockmanager/src/main/java/uk/co/danielbryant/djshopping/stockmanager/StockManagerApplication.java
+/home/master/projects/docker-Java-kubernetes-project/stockmanager/src/main/java/uk/co/danielbryant/djshopping/stockmanager/repositories/StockRepository.java
+/home/master/projects/docker-Java-kubernetes-project/stockmanager/src/main/java/uk/co/danielbryant/djshopping/stockmanager/config/DataGenerator.java
+/home/master/projects/docker-Java-kubernetes-project/stockmanager/src/main/java/uk/co/danielbryant/djshopping/stockmanager/model/Stock.java
+/home/master/projects/docker-Java-kubernetes-project/stockmanager/src/main/java/uk/co/danielbryant/djshopping/stockmanager/exceptions/StockNotFoundException.java
+/home/master/projects/docker-Java-kubernetes-project/stockmanager/src/main/java/uk/co/danielbryant/djshopping/stockmanager/resources/StockResource.java
+/home/master/projects/docker-Java-kubernetes-project/stockmanager/src/main/java/uk/co/danielbryant/djshopping/stockmanager/services/StockService.java

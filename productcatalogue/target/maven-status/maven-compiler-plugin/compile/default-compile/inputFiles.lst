@@ -1,0 +1,6 @@
+/home/master/projects/docker-Java-kubernetes-project/productcatalogue/src/main/java/uk/co/danielbryant/djshopping/productcatalogue/ProductServiceApplication.java
+/home/master/projects/docker-Java-kubernetes-project/productcatalogue/src/main/java/uk/co/danielbryant/djshopping/productcatalogue/model/Product.java
+/home/master/projects/docker-Java-kubernetes-project/productcatalogue/src/main/java/uk/co/danielbryant/djshopping/productcatalogue/configuration/ProductServiceConfiguration.java
+/home/master/projects/docker-Java-kubernetes-project/productcatalogue/src/main/java/uk/co/danielbryant/djshopping/productcatalogue/resources/ProductResource.java
+/home/master/projects/docker-Java-kubernetes-project/productcatalogue/src/main/java/uk/co/danielbryant/djshopping/productcatalogue/services/ProductService.java
+/home/master/projects/docker-Java-kubernetes-project/productcatalogue/src/main/java/uk/co/danielbryant/djshopping/productcatalogue/healthchecks/BasicHealthCheck.java

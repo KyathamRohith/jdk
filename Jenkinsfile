@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git 'https://github.com/KyathamRohith/jdk.git'
+                git branch: 'main', url: 'https://github.com/KyathamRohith/jdk.git'
             }
         }
 
@@ -18,7 +18,10 @@ pipeline {
             steps {
                 script {
                     for (service in SERVICES) {
-                        sh "mvn -f ${service}/pom.xml clean package"
+                        sh """
+                        echo "Building and testing ${service}..."
+                        mvn -f ${service}/pom.xml clean package
+                        """
                     }
                 }
             }
@@ -28,7 +31,10 @@ pipeline {
             steps {
                 script {
                     for (service in SERVICES) {
-                        sh "docker build -t $DOCKER_REGISTRY/${service}:latest -f ${service}/Dockerfile ${service}"
+                        sh """
+                        echo "Building Docker image for ${service}..."
+                        docker build -t $DOCKER_REGISTRY/${service}:latest -f ${service}/Dockerfile ${service}
+                        """
                     }
                 }
             }
@@ -39,7 +45,10 @@ pipeline {
                 script {
                     withDockerRegistry([credentialsId: 'docker-hub-credentials', url: '']) {
                         for (service in SERVICES) {
-                            sh "docker push $DOCKER_REGISTRY/${service}:latest"
+                            sh """
+                            echo "Pushing ${service} image to Docker Hub..."
+                            docker push $DOCKER_REGISTRY/${service}:latest
+                            """
                         }
                     }
                 }
@@ -50,8 +59,11 @@ pipeline {
             steps {
                 script {
                     for (service in SERVICES) {
-                     /*   sh "kubectl apply -f kubernetes/${service}-deployment.yaml" */
-                        sh "kubectl apply -f kubernetes/${service}-service.yaml"
+                        sh """
+                        echo "Deploying ${service} to Kubernetes..."
+                        kubectl apply -f kubernetes/${service}-deployment.yaml
+                        kubectl apply -f kubernetes/${service}-service.yaml
+                        """
                     }
                 }
             }
@@ -60,10 +72,10 @@ pipeline {
 
     post {
         success {
-            echo "All services deployed successfully!"
+            echo "✅ All services deployed successfully!"
         }
         failure {
-            echo "Deployment failed. Check logs for errors."
+            echo "❌ Deployment failed. Check logs for errors."
         }
     }
 }

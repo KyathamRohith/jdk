@@ -4,6 +4,7 @@ pipeline {
     environment {
         DOCKER_REGISTRY = "rohith1305"
         KUBE_NAMESPACE = "djshopping"
+        KUBECONFIG_PATH = "/home/master/.kube/config"
     }
 
     stages {
@@ -61,20 +62,22 @@ pipeline {
         }
 
         stage('Deploy to Kubernetes') {
-    steps {
-        script {
-            def services = ["shopfront", "productcatalogue", "stockmanager"]
-            for (service in services) {
-                sh """
-                export KUBECONFIG=/home/master/.kube/config
-               
-                kubectl -n $KUBE_NAMESPACE apply -f kubernetes/${service}-service.yaml
-                """
+            steps {
+                script {
+                    def services = ["shopfront", "productcatalogue", "stockmanager"]
+                    for (service in services) {
+                        sh """
+                        set -e
+                        echo "⚡ Deploying ${service} to Kubernetes..."
+                        export KUBECONFIG=$KUBECONFIG_PATH
+                        kubectl config view
+                        kubectl get nodes
+                        kubectl -n $KUBE_NAMESPACE apply -f kubernetes/${service}-deployment.yaml
+                        kubectl -n $KUBE_NAMESPACE apply -f kubernetes/${service}-service.yaml
+                        """
+                    }
+                }
             }
-        }
-    }
-}
-
         }
     }
 

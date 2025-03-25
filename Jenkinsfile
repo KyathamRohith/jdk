@@ -47,7 +47,7 @@ pipeline {
             steps {
                 script {
                     def services = ["shopfront", "productcatalogue", "stockmanager"]
-                    withDockerRegistry([credentialsId: 'docker-hub-credentials', url: '']) {
+                    withDockerRegistry([credentialsId: '93c470a0-e8fe-425c-8f55-932aae8919d4', url: '']) {
                         for (service in services) {
                             sh """
                             set -e
